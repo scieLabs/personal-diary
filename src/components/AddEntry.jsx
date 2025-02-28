@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 function AddEntry({ entryData, setEntryData }) {
     const [isModalOpen, setIsModalOpen] = useState(true);

@@ -7,7 +7,7 @@ function Card() {
 
   useEffect(() => {
     const storedEntries =
-      JSON.parse(localStorage.getItem("diaryentries")) || [];
+      JSON.parse(localStorage.getItem("entryData")) || [];
     setEntries(storedEntries);
 
     const sortedEntries = storedEntries.sort((a, b) => {
