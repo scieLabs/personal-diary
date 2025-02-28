@@ -1,6 +1,8 @@
 import React from "react";
 
 function AddEntry({ entryData, setEntryData }) {
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
     const handleEntryData = (e) => {
         setEntryData({
             ...entryData,
@@ -30,7 +32,7 @@ function AddEntry({ entryData, setEntryData }) {
         e.preventDefault();
         localStorage.setItem('entryData', JSON.stringify(entryData));
         setEntryData({
-            date: currentDate,
+            date: '',
             title: '',
             img: '',
             entry: '',
@@ -38,50 +40,79 @@ function AddEntry({ entryData, setEntryData }) {
         });
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setEntryData({
+            date: '',
+            title: '',
+            img: '',
+            entry: '',
+
+        });
+
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor='date'>Date</label>
-                <input
-                    onChange={handleEntryData}
-                    value={entryData.date}
-                    type='text'
-                    id='date'
-                    name='date'
-                    readOnly={true}
-                />
+        <div className='modal block' id='addEntry-modal'>
+            <div className='modal-content'>
+                <div className='modal-header bg-[#ebc2d5]'>
+                    <span className='close' onClick={closeModal}>&times;</span>
+                    {/* should make the X to close the thing */}
+                    <h1 className='text-white text-xl'>New Entry</h1>
+                </div>
+
+                <div className='modal-body bg-[#cca9b9] text-white'>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor='date'>Date</label>
+                            <input
+                                onChange={handleEntryData}
+                                value={currentDate}
+                                type='text'
+                                id='date'
+                                name='date'
+                                readOnly={true}
+                                className='text-white bg-[#ad8f9d]'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='title'>Title</label>
+                            <input
+                                onChange={handleEntryData}
+                                value={entryData.title}
+                                type='text'
+                                id='title'
+                                name='title'
+                                className='text-white bg-[#ad8f9d]'
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor='img'>Image</label>
+                            <input 
+                                onChange={handleEntryData}
+                                value={entryData.img}
+                                type='url'
+                                // maybe set to type='file' for now so user can input their own image, at least before I figure out how to display this shite
+                                id='img'
+                                name='img'
+                                className='text-white bg-[#ad8f9d]'
+                            />
+                        </div>
+                        <div>
+                            <textarea
+                                onChange={handleEntryData}
+                                value={entryData.entry}
+                                id='entry'
+                                name='entry'
+                                className='text-white bg-[#ad8f9d]'
+                            ></textarea>
+                        </div>
+                        <button type='submit' className='text-white bg-[#ebc2d5]'>Submit</button>
+                        {/* figure out how to make submit also close the modal */}
+                    </form>
+                </div>
             </div>
-            <div>
-                <label htmlFor='title'>Title</label>
-                <input
-                    onChange={handleEntryData}
-                    value={entryData.title}
-                    type='text'
-                    id='title'
-                    name='title'
-                />
-            </div>
-            <div>
-                <label htmlFor='img'>Image</label>
-                <input 
-                    onChange={handleEntryData}
-                    value={entryData.img}
-                    type='url'
-                    // maybe set to type='file' for now so user can input their own image, at least before I figure out how to display this shite
-                    id='img'
-                    name='img'
-                />
-            </div>
-            <div>
-                <textarea
-                    onChange={handleEntryData}
-                    value={entryData.entry}
-                    id='entry'
-                    name='entry'
-                ></textarea>
-            </div>
-            <button type='submit'>Submit</button>
-        </form>
+        </div>
     );
 }
 
