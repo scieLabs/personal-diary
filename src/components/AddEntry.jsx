@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 
 function AddEntry({ entryData, setEntryData }) {
-    const [isModalOpen, setIsModalOpen] = useState(true);
-
+    const [isAddOpen, setIsAddOpen] = useState(false);
+    
     const handleEntryData = (e) => {
         setEntryData({
             ...entryData,
@@ -41,8 +41,12 @@ function AddEntry({ entryData, setEntryData }) {
         });
     };
 
+    // const toggleAddEntry = () => {
+    //     setIsAddOpen(!isAddOpen);
+    // };
+
     const closeModal = () => {
-        setIsModalOpen(false);
+        setIsAddOpen(false);
         setEntryData({
             date: '',
             title: '',
@@ -54,7 +58,8 @@ function AddEntry({ entryData, setEntryData }) {
     }
 
     return (
-        <div className='modal block shadow-lg' id='addEntry-modal'>
+        <>
+        <div className='modal block shadow-lg overlay' id='addEntry-modal'>
             <div className='modal-content'>
                 <div className='modal-header bg-[#ebc2d5]'>
                     <span className='close' onClick={closeModal}>&times;</span>
@@ -108,12 +113,13 @@ function AddEntry({ entryData, setEntryData }) {
                                 className='text-white bg-[#ad8f9d]'
                             ></textarea>
                         </div>
-                        <button type='submit' className='text-white bg-[#ebc2d5]'>Submit</button>
+                        <button type='submit' className='text-white bg-[#ebc2d5]' onClick={toggleAddEntry}>Submit</button>
                         {/* figure out how to make submit also close the modal */}
                     </form>
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
