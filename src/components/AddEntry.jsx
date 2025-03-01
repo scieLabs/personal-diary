@@ -54,7 +54,7 @@ function AddEntry({ entryData, setEntryData }) {
     }
 
     return (
-        <div className='modal block' id='addEntry-modal'>
+        <div className='modal block shadow-lg' id='addEntry-modal'>
             <div className='modal-content'>
                 <div className='modal-header bg-[#ebc2d5]'>
                     <span className='close' onClick={closeModal}>&times;</span>
