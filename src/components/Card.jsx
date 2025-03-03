@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
+import AddEntry from "./AddEntry";
 
 function Card() {
   const [entries, setEntries] = useState([]);
@@ -26,9 +27,18 @@ function Card() {
     setSelectedEntry(null);
   };
 
+  const addNewEntry = (newEntry) => {
+    const updatedEntries = [newEntry, ...entries];
+    setEntries(updatedEntries);
+    localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
+  };
+
   return (
     <div>
-      <Header openModal={openModal} />
+      <Header openModal={() => setIsModalOpen(true)} />
+      {isModalOpen && (
+        <AddEntry addNewEntry={addNewEntry} closeModal={closeModal} />
+      )}
       <div className="grid grid-cols-5 container m-auto gap-10">
         {entries.length > 0 ? (
           entries.map((entry) => (
