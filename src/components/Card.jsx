@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from "./Header";
 
 function Card() {
   const [entries, setEntries] = useState([]);
@@ -8,13 +9,11 @@ function Card() {
   useEffect(() => {
     const storedEntries =
       JSON.parse(localStorage.getItem("diaryentries")) || [];
-    setEntries(storedEntries);
-
     const sortedEntries = storedEntries.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB - dateA;
+      return new Date(b.date) - new Date(a.date);
     });
+
+    setEntries(sortedEntries);
   }, []);
 
   const openModal = (entry) => {
@@ -29,6 +28,7 @@ function Card() {
 
   return (
     <div>
+      <Header openModal={openModal} />
       <div className="grid grid-cols-5 container m-auto gap-10">
         {entries.length > 0 ? (
           entries.map((entry) => (
