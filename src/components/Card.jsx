@@ -28,7 +28,7 @@ function Card() {
   };
 
   const addNewEntry = (newEntry) => {
-    const updatedEntries = [newEntry, ...entries];
+    const updatedEntries = [...entries, newEntry];
     setEntries(updatedEntries);
     localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
   };
