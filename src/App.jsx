@@ -1,9 +1,9 @@
-import Card from "./components/Card";
+import CardList from "./components/CardList";
 
 function App() {
   return (
     <>
-      <Card />
+      <CardList />
     </>
   );
 }
