@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 
 function AddEntry({ addNewEntry, closeModal }) {
   const [entryData, setEntryData] = useState({
@@ -58,7 +58,7 @@ function AddEntry({ addNewEntry, closeModal }) {
                   value={entryData.date}
                   onChange={handleEntryData}
                   required
-                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-[#229389] text-teal-800 text-sm rounded-lg block w-full p-2.5"
+                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-teal-800 text-teal-800 text-sm rounded-lg block w-full p-2.5"
                 />
               </div>
 
@@ -70,7 +70,7 @@ function AddEntry({ addNewEntry, closeModal }) {
                   value={entryData.title}
                   onChange={handleEntryData}
                   required
-                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-[#229389] text-teal-800 text-sm rounded-lg block w-full p-2.5"
+                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-teal-800 text-teal-800 text-sm rounded-lg block w-full p-2.5"
                 />
               </div>
 
@@ -81,7 +81,7 @@ function AddEntry({ addNewEntry, closeModal }) {
                   name="img"
                   value={entryData.img}
                   onChange={handleEntryData}
-                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-[#229389] text-teal-800 text-sm rounded-lg block w-full p-2.5"
+                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-teal-800 text-teal-800 text-sm rounded-lg block w-full p-2.5"
                 />
               </div>
 
@@ -92,7 +92,7 @@ function AddEntry({ addNewEntry, closeModal }) {
                   value={entryData.entry}
                   onChange={handleEntryData}
                   required
-                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-[#229389] text-teal-800 text-sm rounded-lg block w-full p-2.5"
+                  className="bg-gray-50 border border-gray-300 focus:outline-none focus:ring-0 focus:border-teal-800 text-teal-800 text-sm rounded-lg block w-full p-2.5"
                 ></textarea>
               </div>
               <div className="flex justify-center">

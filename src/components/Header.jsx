@@ -9,7 +9,7 @@ function Header({ openModal }) {
         </a>
         <div>
           <button
-            onClick={openModal} data-modal-target="default-modal" data-modal-toggle="default-modal"
+            onClick={openModal}
             className="mt-4 bg-white text-teal-800 px-4 py-2 rounded hover:text-white hover:bg-teal-600 transition all ease-in duration-300 cursor-pointer "
           >
             Add New Entry
