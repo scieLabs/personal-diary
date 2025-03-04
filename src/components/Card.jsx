@@ -41,6 +41,12 @@ function Card() {
     localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
   };
 
+  const addNewEntry = (newEntry) => {
+    const updatedEntries = [...entries, newEntry];
+    setEntries(updatedEntries);
+    localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
+  };
+
   return (
     <div>
       <Header openModal={() => openModal()} />
