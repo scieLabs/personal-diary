@@ -49,6 +49,7 @@ function AddEntry({ addNewEntry, closeModal, entries }) {
 
     setError("");
     closeModal();
+
   };
 
   return (

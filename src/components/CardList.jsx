@@ -5,6 +5,7 @@ import Header from "./Header";
 import AddEntry from "./AddEntry";
 import ModalCard from "./ModalCard";
 import Card from "./Card";
+import Footer from "./Footer";
 
 function CardList() {
   const [entries, setEntries] = useState([]);
@@ -99,7 +100,10 @@ function CardList() {
       </div>
 
       {selectedCard && <ModalCard onClose={handleClose} card={selectedCard} />}
+
+      <Footer />
     </div>
+
   );
 }
 
