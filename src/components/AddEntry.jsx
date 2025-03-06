@@ -50,13 +50,6 @@ function AddEntry({ addNewEntry, closeModal, entries }) {
     setError("");
     closeModal();
 
-// nope!
-    const storedData = JSON.parse(localStorage.getItem("diaryentries")) || [];
-
-    if (storedData.date == entryData.date) {
-      throw new Error ("Date already exists.");
-    }
-
   };
 
   return (
