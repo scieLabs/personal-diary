@@ -5,7 +5,6 @@ import Header from "./Header";
 import AddEntry from "./AddEntry";
 import ModalCard from "./ModalCard";
 import Card from "./Card";
-import Footer from "./Footer";
 
 function CardList() {
   const [entries, setEntries] = useState([]);
@@ -83,7 +82,7 @@ function CardList() {
         />
       )}
 
-      <div className="grid grid-cols-5 container m-auto gap-10">
+      <div className="grid max-sm:grid-cols-1 max-sm:place-items-center sm:grid-cols-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 xl:grid-cols-5 container m-auto gap-10">
         {entries.length > 0 ? (
           entries.map((entry, index) => (
             <Card
@@ -100,10 +99,7 @@ function CardList() {
       </div>
 
       {selectedCard && <ModalCard onClose={handleClose} card={selectedCard} />}
-
-      <Footer />
     </div>
-
   );
 }
 
