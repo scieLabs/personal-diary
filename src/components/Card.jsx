@@ -1,77 +1,42 @@
-import { useState, useEffect } from "react";
-import Header from "./Header";
-import AddEntry from "./AddEntry";
+import React from "react";
+import { FaTrash } from "react-icons/fa";
 
-function Card() {
-  const [entries, setEntries] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState(null);
-  const [isAddingEntry, setIsAddingEntry] = useState(false);
-
-  useEffect(() => {
-    const storedEntries =
-      JSON.parse(localStorage.getItem("diaryentries")) || [];
-    const sortedEntries = storedEntries.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
-
-    setEntries(sortedEntries);
-  }, []);
-
-  const openModal = (entry = null) => {
-    if (entry) {
-      setSelectedEntry(entry);
-      setIsAddingEntry(false);
-    } else {
-      setSelectedEntry(null);
-      setIsAddingEntry(true);
-    }
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedEntry(null);
-    setIsAddingEntry(false);
-  };
-
-  const addNewEntry = (newEntry) => {
-    const updatedEntries = [...entries, newEntry];
-    setEntries(updatedEntries);
-    localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
-  };
-
+const Card = (props) => {
   return (
-    <div>
-      <Header openModal={() => openModal()} />
+    <div
+      data-aos="fade-up"
+      data-aos-delay={props.index * 200}
+      className="w-70 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+    >
+      <img
+        src={props.entry.img}
+        alt={props.entry.title}
+        className="h-40 object-cover rounded-xl w-full"
+      />
+      <div className="flex items-center justify-between">
+        <h3 className="font-bold text-lg uppercase mt-2 mb-1">
+          {props.entry.title}
+        </h3>
+        <p className="text-sm text-gray-600">{props.entry.date}</p>
+      </div>
+      <p className="text-sm text-gray-600">{props.entry.entry}</p>
 
-      {isModalOpen && isAddingEntry && (
-        <AddEntry
-          addNewEntry={addNewEntry}
-          closeModal={closeModal}
-          entries={entries}
-        />
-      )}
-
-      <div className="grid grid-cols-5 container m-auto gap-10">
-        {entries.length > 0 ? (
-          entries.map((entry) => (
-            <div key={entry.id}>
-              <img src={entry.img} alt={entry.title} className="w-80" />
-              <h3>{entry.title}</h3>
-              <p>{entry.date}</p>
-              <p>{entry.entry}</p>
-              <button onClick={() => openModal(entry)} className="bg-blue-50">
-                Open Modal
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>No notes</p>
-        )}
+      <div className="flex justify-between items-center mt-2">
+        <button
+          onClick={props.toggleModal}
+          className="bg-teal-600 text-white px-3 py-1 rounded-md hover:bg-teal-700 cursor-pointer"
+        >
+          Read More...
+        </button>
+        <button
+          onClick={() => props.removeEntry(props.entry.id)}
+          className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700  cursor-pointer"
+        >
+          <FaTrash size={20} />
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Card;
