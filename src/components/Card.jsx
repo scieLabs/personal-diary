@@ -1,12 +1,11 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
-
 const Card = (props) => {
   return (
     <div
       data-aos="fade-up"
       data-aos-delay={props.index * 200}
-      className="w-70 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
+      className="xl:w-65 md:w-60 p-2 bg-white rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl"
     >
       <img
         src={props.entry.img}
