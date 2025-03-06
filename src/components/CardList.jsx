@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Header from "./Header";
 import AddEntry from "./AddEntry";
 import ModalCard from "./ModalCard";
@@ -11,6 +13,13 @@ function CardList() {
   const [isAddingEntry, setIsAddingEntry] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [showCardModal, setShowCardModal] = useState(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1500,
+      once: false,
+    });
+  }, []);
 
   useEffect(() => {
     const storedEntries =
@@ -55,9 +64,11 @@ function CardList() {
     localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
   };
 
-  const displayCards = entries.map((entry) => (
-    <Card key={entry.id} entry={entry} toggleModal={() => toggleModal(entry)} />
-  ));
+  const removeEntry = (id) => {
+    const updatedEntries = entries.filter((entry) => entry.id !== id);
+    setEntries(updatedEntries);
+    localStorage.setItem("diaryentries", JSON.stringify(updatedEntries));
+  };
 
   return (
     <div>
@@ -72,7 +83,19 @@ function CardList() {
       )}
 
       <div className="grid grid-cols-5 container m-auto gap-10">
-        {entries.length > 0 ? displayCards : <p>No notes</p>}
+        {entries.length > 0 ? (
+          entries.map((entry, index) => (
+            <Card
+              key={entry.id}
+              entry={entry}
+              toggleModal={() => toggleModal(entry)}
+              index={index}
+              removeEntry={removeEntry}
+            />
+          ))
+        ) : (
+          <p>No notes</p>
+        )}
       </div>
 
       {selectedCard && <ModalCard onClose={handleClose} card={selectedCard} />}
